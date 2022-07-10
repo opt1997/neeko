@@ -1,6 +1,8 @@
 
 // 19. 删除链表的倒数第N个结点 https://leetcode.cn/problems/remove-nth-node-from-end-of-list/
 
+import common.ListNode;
+
 public class LeetCode19 {
     public ListNode removeNthFromEnd(ListNode head, int n) {
         ListNode h = new ListNode(0, head);
@@ -18,20 +20,5 @@ public class LeetCode19 {
         return head;
     }
 
-    class ListNode {
-        int val;
-        ListNode next;
 
-        ListNode() {
-        }
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-    }
 }
