@@ -1,7 +1,6 @@
 package dfs;
 
 // 733. 图像渲染 https://leetcode.cn/problems/flood-fill/
-
 public class LeetCode733 {
 
     public static void main(String[] args) {
@@ -18,24 +17,18 @@ public class LeetCode733 {
         return image;
     }
 
-    public void dfs(int[][] image, int sr, int sc, int oldColor, int color) {
-        // 节点要在矩阵中
-        if (sr < 0 || sc < 0 || sr >= image.length || sc >= image[0].length) {
-            return;
-        }
-        // 像素和旧值相同时，才会进行涂色，否则跳过
-        if (image[sr][sc] != oldColor ) {
-            return;
-        }
-        // 已经上色过的节点需要跳过
-        if (oldColor == color) {
-            return;
-        }
-        image[sr][sc] = color;
-        dfs(image, sr - 1, sc, oldColor, color);
-        dfs(image, sr + 1, sc, oldColor, color);
-        dfs(image, sr, sc - 1, oldColor, color);
-        dfs(image, sr, sc + 1, oldColor, color);
-        return;
+    void dfs(int[][] image, int sr, int sc, int oldColor, int newColor) {
+        // 越界
+        if (sr < 0 || sc < 0 || sr >= image.length || sc >= image[0].length) return;
+        // 不满足上色条件则直接返回, 根据题意, 条件有：
+        // 1. 该点颜色与oldColor相同; 2. 该点只需要访问一遍. 本题可以利用"当前颜色≠newColor"来判断
+        if (image[sr][sc] != oldColor) return; // 不满足处理条件
+        if (image[sr][sc] == newColor) return; // 说明已经访问过了，不再访问
+
+        image[sr][sc] = newColor;
+        dfs(image, sr - 1, sc, oldColor, newColor);
+        dfs(image, sr + 1, sc, oldColor, newColor);
+        dfs(image, sr, sc - 1, oldColor, newColor);
+        dfs(image, sr, sc + 1, oldColor, newColor);
     }
 }
